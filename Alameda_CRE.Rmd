@@ -333,6 +333,7 @@ hm1 <- ec_hm1  %>%  arrange(group) %>%
 hm1
 
 ### THIS! is the plot with ST vs resistance gene of FIg 1 in Niko_01
+### geom_tile() is the plot type!
 ```
 
 
