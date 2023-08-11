@@ -28,7 +28,7 @@ plas_master <- read.csv("plas_master.csv")
 ```{r}
 #barplot 
 #merge dataframes
-arg_plas <- merge(arg, plas_master, by = c('sequence', 'isolate'), all = F) %>% select(sequence, isolate, mlplasmid_prediction, posterior_probability_chromosome, posterior_probability_plasmid, mlplasmid_prediction, mobsuite_prediction, gene, accession, product, resistance, id)
+arg_plas <- merge(arg, plas_master, by = c('sequence', 'isolate'), all = F) %>% select(sequence, isolate, mlplasmid_prediction, posterior_probability_chromosome, posterior_probability_plasmid, mlplasmid_prediction, mobsuite_prediction, gene, accession, product, resistance) #, id)
 
 #filter out ambiguous contig calls
 arg_plas <- arg_plas %>% filter(mlplasmid_prediction == "chromosome" & mobsuite_prediction == "chromosome" | mlplasmid_prediction == "plasmid" & mobsuite_prediction == "plasmid")
@@ -244,7 +244,7 @@ ec_summary <- ec_summary %>%
 #Group the extra GENES into an "other category" 
 ec_summary$product <-as.factor(as.character((ec_summary$product)))
 typeof(ec_summary$product)
-ec_summary$ST <- recode(ec_summary$ST, "-" = "UIST")
+#?? ec_summary$ST <- recode(ec_summary$ST, "-" = "UIST")                        ## ??
 ec_summary <- ec_summary %>% mutate(product2 = product)
 ec_summary$product2 <- gsub("mdf", "other.", ec_summary$product2)
 ec_summary$product2 <- gsub("mph", "other.", ec_summary$product2)
@@ -331,6 +331,8 @@ hm1 <- ec_hm1  %>%  arrange(group) %>%
   coord_equal() + scale_x_discrete(position = "top") + scale_color_manual(values = c("brown", "chocolate", "coral", "darkgoldenrod1", "darkturquoise", "darkslategrey4", "deepskyblue2", "blueviolet"))
 
 hm1
+
+### THIS! is the plot with ST vs resistance gene of FIg 1 in Niko_01
 ```
 
 
